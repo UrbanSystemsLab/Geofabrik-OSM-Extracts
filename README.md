@@ -90,7 +90,9 @@ ogr2ogr -f "ESRI Shapefile" data.shp "geojson-file.geojson" -skipfailures
 
 ---
 
-⚠️ **Encoding Warning**: Make sure that your console output and resultant file output is utf-8. JQ may not work as expected.
+#### ⚠️ UTF-8 Encoding Warning
+
+ Make sure that the console output and resultant file output is utf-8. Otherwise JQ may not work as expected.
 
 **Windows Powershell Users**: Set output encoding to utf-8 [Reference](https://stackoverflow.com/questions/40098771/changing-powershells-default-output-encoding-to-utf-8)
 
