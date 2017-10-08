@@ -87,3 +87,17 @@ echo '{ "type": "FeatureCollection","features":'  >> geojson-file.geojson ; cat 
 ```sh
 ogr2ogr -f "ESRI Shapefile" data.shp "geojson-file.geojson" -skipfailures
 ```
+
+---
+
+⚠️ **Encoding Warning**: Make sure that your console output and resultant file output is utf-8. JQ may not work as expected.
+
+**Windows Powershell Users**: Set output encoding to utf-8 [Reference](https://stackoverflow.com/questions/40098771/changing-powershells-default-output-encoding-to-utf-8)
+
+```sh
+# You can set out-file encoding to utf8 
+$PSDefaultParameterValues['Out-File:Encoding'] = 'utf8'
+
+# OR to convert a text file to utf8
+Get-Content UTF-16LE_encoded.geojson | Set-Content -Encoding utf8 utf8_encoded.geojson
+```
