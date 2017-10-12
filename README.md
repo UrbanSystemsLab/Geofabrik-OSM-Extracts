@@ -5,6 +5,9 @@ Open Street Maps provides extracts that can be downloaded from various portals. 
 
 [Reference: Planet Extracts](http://wiki.openstreetmap.org/wiki/Planet.osm)
 
+Alternatively, you may also download OSM extracts using Overpass API. See documentation [here](https://github.com/UrbanSystemsLab/OverpassAPI-OSM-Extracts)
+![overpass-vs-geofabrik](img/overpass-geofabrik.jpg)
+
 ## Steps
 - Download OSM Extract as `.osm.pbf` file
 - Extract required OSM data from PBF
