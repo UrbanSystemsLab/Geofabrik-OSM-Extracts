@@ -57,15 +57,20 @@ mongoimport --db databaseName -c features --file "features.json" --jsonArray
 ### 5. Aggregate buildings in MongoDB
 Run the mongo shell using `mongod`. In another shell run `mongo` command to perform the following to inspect and aggregate the necessary data.
 
+Aggregate buildings from `features` collection into `buildings` collection. *Optionally*, add some arbitrary height to buildings that are missing the `properties.height` attribute.
+
 ```sh
-# Count the number of buildings
-db.features.count({'properties.building': "yes"})
+# Count features with properties = Buildings:True OR Height:True
+db.features.find({ $or : [{'properties.building' : {$exists : true} },{'properties.height' : {$exists : true} }]}).count()
 
-# Export all buildings to 'buildings' collection
-db.features.aggregate([{ $match: {'properties.building' : 'yes'} },{ $out: "buildings" }])
+# Aggregate those features to buildings collection
+db.features.aggregate([{ $match: {$or : [{'properties.building' : {$exists : true} },{'properties.height' : {$exists : true} }]} },{ $out: "buildings" }])
 
-# Count buildings that have height attribute
-db.buildings.find({'properties.height': {$ne : 'null'}}).count()
+# Count buildings that are missing height attribute
+db.buildings.count({'properties.height': {$exists : false}})
+
+# Set default height for those buildings to '3'
+db.buildings.find({'properties.height': {$exists : false}}).forEach(function(obj) {db.buildings.update({_id : obj._id},{$set : {'properties.height' : parseFloat('3')}});});
 
 ```
 
